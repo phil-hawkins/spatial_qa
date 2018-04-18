@@ -1,0 +1,19 @@
+{
+    "image_dimentions" :
+    {
+        "x" : 400,
+        "y" : 400
+    },
+    "object_size" : 
+    {
+        "min" : 0.05,
+        "max" : 0.25
+    },
+    "object_count" :
+    {
+        "min" : 2,
+        "max" : 5
+    },
+    "file_prefix" : "img_",
+    "image_count" : 10
+}
