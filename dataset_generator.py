@@ -43,8 +43,8 @@ for i in range(config["image_count"]):
     im.save(file_name)
 
     # add questions and answers
-    for q in range(config["questions_per_image"]):
-        qanda = random.choice(QandA.qanda_
-        classes())
-        qanda.random_qanda()
-        print('{}, {}, {}'.format(file_name, qanda.question, qanda.answer))
+    # for q in range(config["questions_per_image"]):
+    #     qanda = random.choice(QandA.qanda_
+    #     classes())
+    #     qanda.random_qanda()
+    #     print('{}, {}, {}'.format(file_name, qanda.question, qanda.answer))
