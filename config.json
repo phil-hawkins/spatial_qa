@@ -15,5 +15,6 @@
         "max" : 5
     },
     "file_prefix" : "img_",
-    "image_count" : 10
+    "image_count" : 10,
+    "thumbnail_scale" : 1
 }
