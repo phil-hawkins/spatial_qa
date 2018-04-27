@@ -4,6 +4,7 @@ from pprint import pprint
 from shape import Circle, Rectangle, Shape
 from q_and_a import QandA, BinaryExistenceQandA, NumericExistenceQandA
 from PIL import Image, ImageDraw
+import pandas as pd
 
 config = json.load(open('config.json'))
 # size of image
@@ -12,12 +13,13 @@ canvas = (config["image_dimentions"]["x"], config["image_dimentions"]["y"])
 scale = config["thumbnail_scale"]
 thumb = canvas[0]/scale, canvas[1]/scale
 
-qanda_list = []
+qa_df = pd.DataFrame(columns=('image_file', 'question', 'answer'))
 
 print(config)
 
 for i in range(config["image_count"]):
-    file_name = '{}/{}{}.png'.format(config["out_dir"], config["file_prefix"], i)
+    file_name = '{}{}.png'.format(config["file_prefix"], i)
+    full_path = '{}/{}'.format(config["out_dir"], file_name)
 
     # build the shape list
     shape_count = random.randint(config["object_count"]["min"], config["object_count"]["max"])
@@ -40,11 +42,15 @@ for i in range(config["image_count"]):
     #im.thumbnail(thumb)
 
     # save image
-    im.save(file_name)
+    im.save(full_path)
 
-    # add questions and answers
-    # for q in range(config["questions_per_image"]):
-    #     qanda = random.choice(QandA.qanda_
-    #     classes())
-    #     qanda.random_qanda()
-    #     print('{}, {}, {}'.format(file_name, qanda.question, qanda.answer))
+    #add questions and answers
+
+    for q in range(config["questions_per_image"]):
+        q_index = i * config["questions_per_image"] + q
+        qanda = random.choice(QandA.qanda_classes())(shapes)
+        qanda.random_qanda()
+        qa_df.loc[q_index] = [file_name, qanda.question, qanda.answer]
+    
+qa_df.to_csv('{}/qanda.csv'.format(config["out_dir"]))
+print(qa_df)
